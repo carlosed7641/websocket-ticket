@@ -10,10 +10,17 @@
 
     <hr>
 
+    <div>
+        <input type="text" id="txtMessage">
+    </div>
+    <div>
+        <button id="btnSend">Enviar</button>
+    </div>
+
     <p>
         Server Status 
-        <span id="lblOnline">Online</span>
-        <span id="lblOffline">Offline</span>
+        <span id="lblOnline" style="color: green;">Online</span>
+        <span id="lblOffline" style="color: red;">Offline</span>
     </p>
 
     <script src="./socket.io/socket.io.js"></script>
