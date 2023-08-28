@@ -4,11 +4,37 @@ const ticketControl = new TicketControl()
 
 export const socketController = (socket) => {
 
-    socket.on("send-message", (payload, callback)  => {
-        const id = 123458
+    socket.emit("latest-ticket", ticketControl.latest)
 
-        callback(id)
+    socket.on("next-ticket", (payload, callback)  => {
+        const next = ticketControl.next()
+        callback(next)
 
-        socket.broadcast.emit("send-message", payload)
+    })
+
+    socket.on("attend-ticket", ({ desktop }, callback) => {
+        if (!desktop) {
+            return callback({
+                ok: false,
+                msg: "El escritorio es obligatorio"
+            })
+        }
+
+        const ticket = ticketControl.attendTicket(desktop)
+        socket.broadcast.emit("latest-ticket", ticketControl.latest)
+        socket.emit("pending-tickets", ticketControl.tickets.length)
+        socket.broadcast.emit("pending-tickets", ticketControl.tickets.length)
+
+        if (!ticket) {
+            callback({
+                ok: false,
+                msg: "Ya no hay tickets pendientes"
+            })
+        } else {
+            callback({
+                ok: true,
+                ticket
+            })
+        }
     })
 }

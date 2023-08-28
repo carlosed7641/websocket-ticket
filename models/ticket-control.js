@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import * as data from '../database/data.json' assert { type: "json"}
+import data from '../database/data.json' assert { type: "json"}
 import { fileURLToPath } from 'url'
 
 
@@ -45,6 +45,7 @@ export class TicketControl {
             this.latest = latest
             this.lastFour = lastFour
         } else {
+            // It's another day
             this.saveDB()
         }
       
