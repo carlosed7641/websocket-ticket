@@ -23,6 +23,10 @@ socket.on('connect', () => {
     btnAttend.disabled = false
 })
 
+socket.on('disconnect', () => {
+    btnAttend.disabled = true
+})
+
 socket.on('pending-tickets', (pendingTickets) => {
     if (pendingTickets === 0) {
         lblPendings.style.display = 'none'

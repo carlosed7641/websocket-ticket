@@ -13,7 +13,6 @@ const socket = io()
 
 socket.on('current-status', (payload) => {
 
-
     const audio = new Audio('./audio/new-ticket.mp3')
     audio.play()
 
